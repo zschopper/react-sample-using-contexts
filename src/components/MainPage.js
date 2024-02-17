@@ -4,17 +4,21 @@ import { useUser } from '../contexts/UserContext';
 import { useTheme } from '../contexts/ThemeContext';
 
 const MainPage = () => {
-  const { language, languages, _, changeLanguage } = useTranslation();
-  const { user, login, logout } = useUser() || {};
+  const { language, languages, __, changeLanguage } = useTranslation();
+  const { user, login, logout } = useUser();// || {};
   const { toggleTheme } = useTheme();
   return (
     <>
-      <h1>{_('Context API Sample app with user, translation, and theme handling')}</h1>
-      {Object.keys(languages).map((e, i) => { return e !== language && <button key={i} onClick={() => { changeLanguage(e) }}>{_('Change language to :lang', { lang: _(languages[e]) })}</button> })}
-      <button onClick={user ? logout : () => login({ 'username': 'Joe', 'age': 12, 'gender': _('male') })}>{user ? _('Logout') : _('Login')}</button>
-      <button onClick={toggleTheme}>{_('Toggle Theme')}</button>
-      <div>
-        <p>{user ? _('Welcome :name!', { 'name': user.username }) : _('Please log in.')}</p>
+      <div className="container">
+        <h1>{__('Context API Sample app with user, translation, and theme handling')}</h1>
+        {Object.keys(languages).map((e, i) => {
+          return e !== language && <button className="btn btn-sm btn-primary" key={i} onClick={() => { changeLanguage(e) }}>{__('Change language to :lang', { lang: __(languages[e]) })}</button>
+        })}{" "}
+        <button className="btn btn-sm btn-info" onClick={user ? logout : () => login({ 'username': 'Joe', 'age': 12, 'gender': __('male') })}>{user ? __('Logout') : __('Login')}</button>{" "}
+        <button className="btn btn-sm btn-info" onClick={toggleTheme}>{__('Toggle Theme')}</button>
+        <div>
+          <p>{user ? __('Welcome :name!', { 'name': user.username }) : __('Please log in.')}</p>
+        </div>
       </div>
     </>
   );

@@ -29,7 +29,7 @@ export const TranslationProvider = ({ children }) => {
         }
     }
 
-    function _(text, replace = {}) {
+    function __(text, replace = {}) {
         if (language !== 'en') {
             text = translations[language][text] ?? text
         }
@@ -41,7 +41,7 @@ export const TranslationProvider = ({ children }) => {
     }
 
     return (
-        <TranslationContext.Provider value={{ language, languages, _, changeLanguage }}>
+        <TranslationContext.Provider value={{ language, languages, __, changeLanguage }}>
             {children}
         </TranslationContext.Provider>
     );
